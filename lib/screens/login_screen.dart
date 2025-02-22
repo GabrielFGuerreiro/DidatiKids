@@ -18,14 +18,23 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(title: const Text('DidatiKids')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      body: Container(
+        padding: const EdgeInsets.all(100),
+        child: Container(
+        width: width,
+        height: height,
+        color: const Color(0xFFCEB9FF),
+        padding: const EdgeInsets.all(50.0),
         child: Form(
           key: _formKey,
           child: Column(
             children: [
+              Container(color: Colors.black, height: 130.0, width: 180.0, padding: const EdgeInsets.all(24), margin: const EdgeInsets.fromLTRB(0, 10, 0, 50), child: const Text('DidatiKids')),
               TextFormField(
                 controller: _emailController,
                 decoration: const InputDecoration(labelText: 'e-mail'),
@@ -51,13 +60,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   return null;
                 },
               ),
-              const SizedBox(height: 24),
-              Padding(padding: EdgeInsets.all(5)),
+              const SizedBox(height: 40),
+              const Padding(padding: EdgeInsets.all(5)),
               ElevatedButton(
                 onPressed: () {
                   if (!_formKey.currentState!.validate()) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
+                      const SnackBar(
                         content: Text(
                           'E-mail ou senha incorretos, tente novamente.',
                         ),
@@ -81,12 +90,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
               const SizedBox(height: 24),
               ElevatedButton(
+                style: const ButtonStyle(),
                 onPressed: () {
                   // Envia para a página de cadastro
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => SignInScreen(
+                        builder: (context) => const SignInScreen(
                           
                         ),
                       ),
@@ -98,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
       ),
-    );
+    ));
   }
 
   @override
