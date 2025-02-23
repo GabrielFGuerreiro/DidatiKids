@@ -1,6 +1,8 @@
+import 'package:didatikids/components/button_component.dart';
+import 'package:didatikids/components/text_input_component.dart';
+import 'package:didatikids/themes/standart.dart';
+import 'package:didatikids/utils/form_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:didatikids/screens/signin_screen.dart';
-import 'package:didatikids/screens/success_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -20,95 +22,138 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
+    var frameWidth = MediaQuery.of(context).size.width * 0.80;
+    var frameHeight = MediaQuery.of(context).size.height * 0.60;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('DidatiKids')),
       body: Container(
-        padding: const EdgeInsets.all(100),
-        child: Container(
+        color: backgroungMainColor,
         width: width,
         height: height,
-        color: const Color(0xFFCEB9FF),
-        padding: const EdgeInsets.all(50.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              Container(color: Colors.black, height: 130.0, width: 180.0, padding: const EdgeInsets.all(24), margin: const EdgeInsets.fromLTRB(0, 10, 0, 50), child: const Text('DidatiKids')),
-              TextFormField(
-                controller: _emailController,
-                decoration: const InputDecoration(labelText: 'e-mail'),
-                keyboardType: TextInputType.emailAddress,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Por favor, insira seu e-mail';
-                  } else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-                    return 'E-mail inválido';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 16),
-              TextFormField(
-                controller: _passwordController,
-                decoration: const InputDecoration(labelText: 'senha'),
-                keyboardType: TextInputType.visiblePassword,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Por favor, insira sua senha';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 40),
-              const Padding(padding: EdgeInsets.all(5)),
-              ElevatedButton(
-                onPressed: () {
-                  if (!_formKey.currentState!.validate()) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text(
-                          'E-mail ou senha incorretos, tente novamente.',
-                        ),
-                      ),
-                    );
-                  } else {
-                    // Envia para o banco de dados, entra no sistema
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => SuccessScreen(
-                          email: _emailController.text,
-                          password: _passwordController.text,
-                        ),
-                      ),
-                    );
-                  }
-                },
-                child: const Text('Entrar'),
-              ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            //Logo
+            Container(
+              width: 500,
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+              child: Image.asset('images/title_logo.png'),
+            ),
 
-              const SizedBox(height: 24),
-              ElevatedButton(
-                style: const ButtonStyle(),
-                onPressed: () {
-                  // Envia para a página de cadastro
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const SignInScreen(
-                          
-                        ),
-                      ),
-                    );
-                },
-                child: const Text('Cadastre-se'),
+            // Frame lilás
+            Container(
+              width: frameWidth,
+              height: frameHeight,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(30)),
+                color: backgroundSecondColor,
               ),
-            ],
-          ),
+              padding: const EdgeInsets.fromLTRB(50, 40, 50, 0),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      padding: EdgeInsets.fromLTRB(0, 20, 0, 10),
+                      child: Stack(
+                        children: [
+                          Text(
+                            'Login',
+                            style: TextStyle(
+                              fontFamily: 'Super Funnel',
+                              fontSize: 50,
+                              color: yellow,
+                            ),
+                          ),
+                          // Text(
+                          //   'Log in',
+                          //   style: TextStyle(
+                          //     fontFamily: 'Super Funnel',
+                          //     fontSize: 50,
+                          //     foreground:
+                          //         Paint()
+                          //           ..style = PaintingStyle.stroke
+                          //           ..strokeWidth = 1
+                          //           ..color = Colors.white,
+                          //   ),
+                          // ),
+                        ],
+                      ),
+                    ),
+
+                    //Input email
+                    TextInputComponent(
+                      label: 'e-mail',
+                      validator: (value) => validateEmail(value),
+                      inputType: TextInputType.emailAddress,
+                      controller: _emailController,
+                      readOnly: false,
+                      suffixIcon: null,
+                      handleTap: () => {},
+                      mainColor: inputMainColor,
+                      hideText: false,
+                      hint: '',
+                    ),
+
+                    SizedBox(height: 5),
+
+                    //Input senha
+                    TextInputComponent(
+                      label: 'senha',
+                      validator: (value) => validatePassword(value),
+                      inputType: TextInputType.visiblePassword,
+                      controller: _passwordController,
+                      readOnly: false,
+                      suffixIcon: null,
+                      handleTap: () => {},
+                      mainColor: inputMainColor,
+                      hideText: true,
+                      hint: '',
+                    ),
+
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      child: ButtonComponent(
+                        isTextButton: true,
+                        text: 'Esqueceu a senha?',
+                        mainColor: yellow,
+                        secondColor: Colors.black,
+                        handlePress: () => handlePasswordButton(context),
+                        minWidth: 0,
+                      ),
+                    ),
+
+                    SizedBox(height: 30),
+
+                    //Botao enviar
+                    ButtonComponent(
+                      isTextButton: false,
+                      text: 'Entrar',
+                      mainColor: buttonColor,
+                      secondColor: Colors.white,
+                      handlePress: () => handleSubmitLoginButton(_formKey, context, _emailController, _passwordController),
+                      minWidth: double.infinity,
+                    ),
+
+                    //Botao cadastro
+                    ButtonComponent(
+                      isTextButton: true,
+                      text: 'Fazer cadastro',
+                      mainColor: yellow,
+                      secondColor: Colors.black,
+                      handlePress: () => handleSignInButton(context),
+                      minWidth: 0,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
-    ));
+    );
   }
 
   @override

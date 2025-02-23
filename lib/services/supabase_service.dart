@@ -18,7 +18,6 @@ class SupabaseService {
 
     String jsonString = await rootBundle.loadString('assets/database.json');
     Map<String, dynamic> credentials = jsonDecode(jsonString);
-    print(jsonString);
 
 
     await Supabase.initialize(
