@@ -8,7 +8,9 @@ plugins {
 android {
     namespace = "com.example.form"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    //Comentei pq n esta conseguindo rodar, pode descomentar o 1º e comentar o 2º -Gabriel
+    // ndkVersion = flutter.ndkVersion 
+    ndkVersion = "27.0.12077973"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11

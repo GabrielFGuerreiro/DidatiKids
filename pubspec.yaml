@@ -12,6 +12,8 @@ dependencies:
 
   cupertino_icons: ^1.0.8
   supabase_flutter: ^2.8.3
+  flutter_native_splash: ^2.4.5
+  flutter_launcher_icons: ^0.14.3
 
 dev_dependencies:
   flutter_test:
@@ -20,12 +22,21 @@ dev_dependencies:
   flutter_lints: ^5.0.0
 
 flutter:
-
   uses-material-design: true
   assets:
-    - assets/images/title_logo.png
+    - assets/images/
 
   fonts:
     - family: Super Funnel
       fonts: 
         - asset: assets/fonts/Super Funnel.ttf
+
+flutter_launcher_icons:
+  android: true
+  min_sdk_android: 21
+  ios: true
+  remove_alpha_ios: true
+  image_path: "assets/images/logo_sFundo.png"
+  adaptive_icon_foreground: "assets/images/logo_sFundo.png"
+  adaptive_icon_background: "#FF673AB7"
+  
