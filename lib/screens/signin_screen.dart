@@ -82,7 +82,7 @@ class _SignInScreenState extends State<SignInScreen> {
             Container(
               width: 500,
               padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
-              child: Image.asset('images/title_logo.png'),
+              child: Image.asset('assets/images/title_logo.png'),
             ),
             Text(
               'Cadastro',
@@ -164,18 +164,18 @@ class _SignInScreenState extends State<SignInScreen> {
                       text: 'Enviar',
                       mainColor: buttonColor,
                       secondColor: Colors.white,
-                      handlePress:
-                          () => _submitForm(),
+                      handlePress: () => _submitForm(),
                       minWidth: double.infinity,
                     ),
 
                     ButtonComponent(
-                      isTextButton: true, 
-                      text: 'Já possuo conta', 
-                      mainColor: yellow, 
-                      secondColor: Colors.black, 
-                      handlePress: () => handleLoginButton(context), 
-                      minWidth: 0)
+                      isTextButton: true,
+                      text: 'Já possuo conta',
+                      mainColor: yellow,
+                      secondColor: Colors.black,
+                      handlePress: () => handleLoginButton(context),
+                      minWidth: 0,
+                    ),
                   ],
                 ),
               ),

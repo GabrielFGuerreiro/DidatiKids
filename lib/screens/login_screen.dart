@@ -38,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Container(
               width: 500,
               padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
-              child: Image.asset('images/title_logo.png'),
+              child: Image.asset('assets/images/title_logo.png'),
             ),
 
             // Frame lilás
@@ -113,6 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       hint: '',
                     ),
 
+                    //Botão esqueceu a senha
                     Container(
                       alignment: Alignment.centerLeft,
                       child: ButtonComponent(
@@ -133,7 +134,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       text: 'Entrar',
                       mainColor: buttonColor,
                       secondColor: Colors.white,
-                      handlePress: () => handleSubmitLoginButton(_formKey, context, _emailController, _passwordController),
+                      handlePress:
+                          () => handleSubmitLoginButton(
+                            _formKey,
+                            context,
+                            _emailController,
+                            _passwordController,
+                          ),
                       minWidth: double.infinity,
                     ),
 
