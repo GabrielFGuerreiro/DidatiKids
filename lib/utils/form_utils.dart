@@ -1,6 +1,6 @@
 import 'package:didatikids/screens/login_screen.dart';
 import 'package:didatikids/screens/signin_screen.dart';
-import 'package:didatikids/screens/success_screen.dart';
+import 'package:didatikids/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 
 String? validateName(value) {
@@ -51,7 +51,7 @@ void handleSubmitLoginButton(
       context,
       MaterialPageRoute(
         builder:
-            (context) => SuccessScreen(
+            (context) => ProfileScreen(
               email: emailController.text,
               password: passwordController.text,
             ),

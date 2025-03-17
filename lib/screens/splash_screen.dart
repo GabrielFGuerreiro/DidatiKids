@@ -1,3 +1,4 @@
+import 'package:didatikids/themes/standart.dart';
 import 'package:flutter/material.dart';
 import 'package:didatikids/screens/login_screen.dart';
 
@@ -28,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
       });
 
       //Leva para a tela de login
-      Future.delayed(Duration(milliseconds: 5000), () {
+      Future.delayed(Duration(milliseconds: 3000), () {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => LoginScreen()),
@@ -51,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen> {
               height: alturaQuadrado,
               //padding: EdgeInsets.all(7),
               decoration: BoxDecoration(
-                color: Colors.deepPurple,
+                color: backgroungMainColor,
                 borderRadius: BorderRadius.circular(
                   icExpandir ? 0 : 70, //Bordas normais qnd expandir
                 ),
@@ -71,7 +72,11 @@ class _SplashScreenState extends State<SplashScreen> {
             bottom: -700,
             left: 0,
             right: 0,
-            child: Image.asset('assets/images/title_sFundo.png', width: 500),
+            child: AnimatedOpacity(
+              opacity: icExpandir ? 1 : 0,
+              duration: Duration(milliseconds: 1000),
+              child: Image.asset('assets/images/title_sFundo.png', width: 500),
+            ),
           ),
         ],
       ),
