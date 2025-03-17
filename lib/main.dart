@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:didatikids/screens/splash_screen.dart'; // Importando a SplashScreen animada
-import 'package:didatikids/screens/login_screen.dart';
 import 'package:flutter/services.dart';
 
 void main() {

@@ -38,5 +38,5 @@ flutter_launcher_icons:
   remove_alpha_ios: true
   image_path: "assets/images/logo_sFundo.png"
   adaptive_icon_foreground: "assets/images/logo_sFundo.png"
-  adaptive_icon_background: "#FF673AB7"
-  
+  adaptive_icon_background: "#FF9F44FB"
+
