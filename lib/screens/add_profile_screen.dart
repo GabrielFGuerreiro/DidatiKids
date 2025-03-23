@@ -146,6 +146,23 @@ class _AddProfileState extends State<AddProfile> {
                   ],
                 ),
               ),
+              Container(
+                alignment: Alignment.center,
+                width: 350,
+                height: 75,
+                decoration: BoxDecoration(
+                  color: backgroundSecondColor,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Text(
+                  "Criar Perfil",
+                  style: TextStyle(
+                    fontSize: 50,
+                    fontFamily: "Super Funnel",
+                    color: Colors.white,
+                  ),
+                ),
+              ),
             ],
           ),
         ),
