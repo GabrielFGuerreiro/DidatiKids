@@ -139,6 +139,10 @@ class _AddProfileState extends State<AddProfile> {
                       hideText: false,
                       hint: '',
                     ),
+
+                    SizedBox(height: 30),
+
+                    ListInputComponent(),
                   ],
                 ),
               ),
@@ -214,6 +218,101 @@ class Avatar extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class ListInputComponent extends StatefulWidget {
+  const ListInputComponent({super.key});
+
+  @override
+  _ListInputComponentState createState() => _ListInputComponentState();
+}
+
+class _ListInputComponentState extends State<ListInputComponent> {
+  // Lista de opções
+  final List<String> listaOpcoes = [
+    "Matemática",
+    "Português",
+    "Ciências",
+    "Geografia",
+    "História",
+  ];
+
+  // Lista para armazenar os itens selecionados
+  final List<String> opcoesSelecionadas = [];
+
+  // Controla se a lista está expandida ou não
+  bool icExpandirLista = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              icExpandirLista = !icExpandirLista;
+            });
+          },
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(
+                //Deixar com borda ou nem???
+                color: Colors.black,
+              ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  opcoesSelecionadas.isEmpty
+                      ? "Selecione as matérias favoritas"
+                      : opcoesSelecionadas.join(", "),
+                  style: TextStyle(fontSize: 16, color: Colors.black),
+                  overflow: TextOverflow.ellipsis, //Limita o texto a uma linha
+                ),
+                Icon(
+                  icExpandirLista ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+                  color: Colors.black,
+                ),
+              ],
+            ),
+          ),
+        ),
+        if (icExpandirLista)
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Colors.black),
+            ),
+            child: ListView.builder(
+              shrinkWrap: true, //Permite que a lista se ajuste ao conteúdo
+              itemCount: listaOpcoes.length,
+              itemBuilder: (context, index) {
+                final opcao = listaOpcoes[index];
+                return CheckboxListTile(
+                  title: Text(opcao),
+                  value: opcoesSelecionadas.contains(opcao),
+                  onChanged: (bool? value) {
+                    setState(() {
+                      if (value == true) {
+                        opcoesSelecionadas.add(opcao); //Adiciona à lista
+                      } else {
+                        opcoesSelecionadas.remove(opcao); //Remove da lista
+                      }
+                    });
+                  },
+                );
+              },
+            ),
+          ),
+      ],
     );
   }
 }
