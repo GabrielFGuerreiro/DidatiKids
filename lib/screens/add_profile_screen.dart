@@ -16,6 +16,8 @@ class _AddProfileState extends State<AddProfile> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _birthdayController = TextEditingController();
 
+  String _selectedIcon = "add";
+
   Future<void> _selectDate(BuildContext context) async {
     DateTime? picked = await showDatePicker(
       context: context,
@@ -28,6 +30,26 @@ class _AddProfileState extends State<AddProfile> {
       setState(() {
         _birthdayController.text =
             "${picked.day.toString().padLeft(2, '0')}/${picked.month.toString().padLeft(2, '0')}/${picked.year}";
+      });
+    }
+  }
+
+  Future<void> _selectAvatar() async {
+    final selectedIcon = await showDialog<String>(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Avatar(),
+        );
+      },
+    );
+
+    if (selectedIcon != null) {
+      setState(() {
+        _selectedIcon = selectedIcon;
       });
     }
   }
@@ -61,17 +83,7 @@ class _AddProfileState extends State<AddProfile> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               GestureDetector(
-                onTap: () {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return Dialog(
-                        shape: RoundedRectangleBorder(),
-                        child: Avatar(),
-                      );
-                    },
-                  );
-                },
+                onTap: _selectAvatar,
                 child: Container(
                   width: 150,
                   height: 150,
@@ -79,7 +91,20 @@ class _AddProfileState extends State<AddProfile> {
                     color: const Color.fromARGB(255, 255, 255, 255),
                     shape: BoxShape.circle,
                   ),
-                  child: Icon(Icons.add, size: 70, color: backgroundMainColor),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(100),
+                    child:
+                        _selectedIcon != "add"
+                            ? Image.asset(
+                              'assets/images/icon_$_selectedIcon.png', // Atualiza o ícone dinamicamente
+                              fit: BoxFit.cover,
+                            )
+                            : Icon(
+                              Icons.add,
+                              size: 70,
+                              color: backgroundMainColor,
+                            ),
+                  ),
                 ),
               ),
               SizedBox(
@@ -155,16 +180,36 @@ class Avatar extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Profile(name: "", icon: "dog", iconWidth: 100),
-              Profile(name: "", icon: "uni", iconWidth: 100),
-              Profile(name: "", icon: "duck", iconWidth: 100),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pop(context, "dog");
+                },
+                child: Profile(name: "", icon: "dog", iconWidth: 100),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pop(context, "uni");
+                },
+                child: Profile(name: "", icon: "uni", iconWidth: 100),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pop(context, "duck");
+                },
+                child: Profile(name: "", icon: "duck", iconWidth: 100),
+              ),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               SizedBox(width: 15),
-              Profile(name: "", icon: "robot", iconWidth: 100),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pop(context, "robot");
+                },
+                child: Profile(name: "", icon: "robot", iconWidth: 100),
+              ),
             ],
           ),
         ],
