@@ -52,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen> {
               height: alturaQuadrado,
               //padding: EdgeInsets.all(7),
               decoration: BoxDecoration(
-                color: backgroungMainColor,
+                color: backgroundMainColor,
                 borderRadius: BorderRadius.circular(
                   icExpandir ? 0 : 70, //Bordas normais qnd expandir
                 ),

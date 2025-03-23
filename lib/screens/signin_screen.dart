@@ -70,7 +70,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
     return Scaffold(
       body: Container(
-        color: backgroungMainColor,
+        color: backgroundMainColor,
         width: width,
         height: height,
         padding: EdgeInsets.all(20),

@@ -27,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     return Scaffold(
       body: Container(
-        color: backgroungMainColor,
+        color: backgroundMainColor,
         width: width,
         height: height,
         child: Column(
