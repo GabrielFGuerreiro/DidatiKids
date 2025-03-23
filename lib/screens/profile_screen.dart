@@ -53,8 +53,12 @@ class ProfileScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Profile(name: 'Caio', icon: 'dog'),
-                            Profile(name: 'Hellena', icon: 'uni'),
+                            Profile(name: 'Caio', icon: 'dog', iconWidth: 150),
+                            Profile(
+                              name: 'Hellena',
+                              icon: 'uni',
+                              iconWidth: 150,
+                            ),
                           ],
                         ),
                       ),
@@ -63,9 +67,13 @@ class ProfileScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Profile(name: 'Noah', icon: 'robot'),
+                            Profile(
+                              name: 'Noah',
+                              icon: 'robot',
+                              iconWidth: 150,
+                            ),
                             AddProfileButton(),
-                            //Profile(name: 'Júlia', icon: 'duck'),
+                            //Profile(name: 'Júlia', icon: 'duck', iconWidth: 150),
                           ],
                         ),
                       ),
@@ -84,7 +92,13 @@ class ProfileScreen extends StatelessWidget {
 class Profile extends StatelessWidget {
   final String name;
   final String icon;
-  const Profile({super.key, required this.name, required this.icon});
+  final double iconWidth;
+  const Profile({
+    super.key,
+    required this.name,
+    required this.icon,
+    required this.iconWidth,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +112,10 @@ class Profile extends StatelessWidget {
           ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(100),
-            child: Image.asset('assets/images/icon_$icon.png', width: 150),
+            child: Image.asset(
+              'assets/images/icon_$icon.png',
+              width: iconWidth,
+            ),
           ),
         ),
         // SizedBox(height: 5),
