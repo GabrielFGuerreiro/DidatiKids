@@ -1,6 +1,7 @@
 import 'package:didatikids/components/text_input_component.dart';
 import 'package:didatikids/themes/standart.dart';
 import 'package:didatikids/utils/form_utils.dart';
+import 'package:didatikids/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 
 class AddProfile extends StatefulWidget {
@@ -59,6 +60,28 @@ class _AddProfileState extends State<AddProfile> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              GestureDetector(
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Dialog(
+                        shape: RoundedRectangleBorder(),
+                        child: Avatar(),
+                      );
+                    },
+                  );
+                },
+                child: Container(
+                  width: 150,
+                  height: 150,
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 255, 255, 255),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(Icons.add, size: 70, color: backgroundMainColor),
+                ),
+              ),
               SizedBox(
                 width: frameWidth,
                 height: frameHeight,
@@ -97,6 +120,54 @@ class _AddProfileState extends State<AddProfile> {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class Avatar extends StatelessWidget {
+  const Avatar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    var frameWidth = MediaQuery.of(context).size.width * 0.80;
+    var frameHeight = MediaQuery.of(context).size.height * 0.70;
+
+    return Container(
+      width: frameWidth,
+      height: frameHeight,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      alignment: Alignment.center,
+      child: Column(
+        children: [
+          Text(
+            "Avatar",
+            style: TextStyle(
+              fontSize: 50,
+              fontFamily: "Super Funnel",
+              color: backgroundMainColor,
+            ),
+          ),
+          SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Profile(name: "", icon: "dog", iconWidth: 100),
+              Profile(name: "", icon: "uni", iconWidth: 100),
+              Profile(name: "", icon: "duck", iconWidth: 100),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(width: 15),
+              Profile(name: "", icon: "robot", iconWidth: 100),
+            ],
+          ),
+        ],
       ),
     );
   }
