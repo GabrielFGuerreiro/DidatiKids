@@ -146,7 +146,17 @@ class _AddProfileState extends State<AddProfile> {
                   ],
                 ),
               ),
-              Container(
+              GestureDetector(
+              onTap: () {      
+                final profileData = {
+                'name': _nameController.text,
+                'birthday': _birthdayController.text,
+                'icon': _selectedIcon,
+                'subjects': (context.findAncestorStateOfType<_ListInputComponentState>()?.opcoesSelecionadas ?? []),
+                };        
+                Navigator.pop(context, profileData);
+              },              
+              child:Container(
                 alignment: Alignment.center,
                 width: 350,
                 height: 75,
@@ -162,7 +172,9 @@ class _AddProfileState extends State<AddProfile> {
                     color: Colors.white,
                   ),
                 ),
-              ),
+              )
+            ),
+              
             ],
           ),
         ),
@@ -205,19 +217,19 @@ class Avatar extends StatelessWidget {
                 onTap: () {
                   Navigator.pop(context, "dog");
                 },
-                child: Profile(name: "", icon: "dog", iconWidth: 100),
+                child: Profile(name: "", icon: "dog", iconWidth: 100, icGoToActivity: false),
               ),
               GestureDetector(
                 onTap: () {
                   Navigator.pop(context, "uni");
                 },
-                child: Profile(name: "", icon: "uni", iconWidth: 100),
+                child: Profile(name: "", icon: "uni", iconWidth: 100, icGoToActivity: false),
               ),
               GestureDetector(
                 onTap: () {
                   Navigator.pop(context, "duck");
                 },
-                child: Profile(name: "", icon: "duck", iconWidth: 100),
+                child: Profile(name: "", icon: "duck", iconWidth: 100, icGoToActivity: false),
               ),
             ],
           ),
@@ -229,7 +241,7 @@ class Avatar extends StatelessWidget {
                 onTap: () {
                   Navigator.pop(context, "robot");
                 },
-                child: Profile(name: "", icon: "robot", iconWidth: 100),
+                child: Profile(name: "", icon: "robot", iconWidth: 100, icGoToActivity: false),
               ),
             ],
           ),
@@ -288,7 +300,7 @@ class _ListInputComponentState extends State<ListInputComponent> {
               children: [
                 Text(
                   opcoesSelecionadas.isEmpty
-                      ? "Selecione as matérias favoritas"
+                      ? "Selecione a(s) matéria(s) favorita(s)"
                       : opcoesSelecionadas.join(", "),
                   style: TextStyle(fontSize: 16, color: Colors.black),
                   overflow: TextOverflow.ellipsis, //Limita o texto a uma linha

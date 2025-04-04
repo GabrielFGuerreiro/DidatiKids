@@ -10,7 +10,8 @@ android {
     compileSdk = flutter.compileSdkVersion
     //Comentei pq n esta conseguindo rodar, pode descomentar o 1º e comentar o 2º -Gabriel
     // ndkVersion = flutter.ndkVersion 
-    ndkVersion = "27.0.12077973"
+    //ndkVersion = "27.0.12077973"
+    ndkVersion = "29.0.13113456"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11

@@ -79,7 +79,9 @@ class _TextInputComponentState extends State<TextInputComponent> {
           ),
 
           readOnly: widget.readOnly ? true : false,
-          onTap: () => widget.handleTap(context),
+          //onTap: () => widget.handleTap(context),
+          onTap: () => widget.handleTap(),
+
           keyboardType: widget.inputType,
 
           validator: (value) {

@@ -1,15 +1,22 @@
 import 'package:didatikids/components/button_component.dart';
+import 'package:didatikids/screens/activity_screen.dart';
 import 'package:didatikids/screens/add_profile_screen.dart';
 import 'package:didatikids/themes/standart.dart';
 import 'package:flutter/material.dart';
 import 'package:didatikids/utils/form_utils.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   final String email;
   final String password;
 
   const ProfileScreen({super.key, required this.email, required this.password});
 
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -53,12 +60,8 @@ class ProfileScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Profile(name: 'Caio', icon: 'dog', iconWidth: 150),
-                            Profile(
-                              name: 'Hellena',
-                              icon: 'uni',
-                              iconWidth: 150,
-                            ),
+                            Profile(name: 'Caio', icon: 'dog', iconWidth: 150, icGoToActivity: true),
+                            Profile(name: 'Hellena', icon: 'uni', iconWidth: 150, icGoToActivity: true),
                           ],
                         ),
                       ),
@@ -67,11 +70,7 @@ class ProfileScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Profile(
-                              name: 'Noah',
-                              icon: 'robot',
-                              iconWidth: 150,
-                            ),
+                            Profile(name: 'Noah', icon: 'robot', iconWidth: 150, icGoToActivity: true),
                             AddProfileButton(),
                             //Profile(name: 'Júlia', icon: 'duck', iconWidth: 150),
                           ],
@@ -93,11 +92,14 @@ class Profile extends StatelessWidget {
   final String name;
   final String icon;
   final double iconWidth;
+  final bool icGoToActivity;
+
   const Profile({
     super.key,
     required this.name,
     required this.icon,
     required this.iconWidth,
+    required this.icGoToActivity
   });
 
   @override
@@ -110,13 +112,30 @@ class Profile extends StatelessWidget {
             border: Border.all(color: Colors.black, width: 1),
             borderRadius: BorderRadius.circular(100),
           ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(100),
-            child: Image.asset(
-              'assets/images/icon_$icon.png',
-              width: iconWidth,
-            ),
-          ),
+          child: icGoToActivity == true
+              ? GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => TelaAtividades()),
+                    );
+                  },
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(100),
+                    child: Image.asset(
+                      'assets/images/icon_$icon.png',
+                      width: iconWidth,
+                    ),
+                  ),
+                )
+              : ClipRRect(
+                  borderRadius: BorderRadius.circular(100),
+                  child: Image.asset(
+                    'assets/images/icon_$icon.png',
+                    width: iconWidth,
+                  ),
+                ),
+          
         ),
         // SizedBox(height: 5),
         Text(
@@ -144,14 +163,27 @@ class AddProfileButton extends StatelessWidget {
           MaterialPageRoute(builder: (context) => AddProfile()),
         );
       },
-      child: Container(
-        width: 150,
-        height: 150,
-        decoration: BoxDecoration(
-          color: const Color.fromARGB(150, 220, 220, 220),
-          shape: BoxShape.circle,
-        ),
-        child: Icon(Icons.add, size: 70, color: backgroundMainColor),
+      child: Column(
+        children: [
+          Container(
+            alignment: Alignment.center,
+            width: 150,
+            height: 150,
+            decoration: BoxDecoration(
+              color: const Color.fromARGB(150, 220, 220, 220),
+              shape: BoxShape.circle,
+            ),
+            child: Icon(Icons.add, size: 70, color: backgroundMainColor),
+          ),
+          Text(
+            "Adicionar",
+            style: TextStyle(
+              fontSize: 25,
+              fontFamily: 'Super Funnel',
+              color: Colors.white,
+            ),
+          ), 
+        ],
       ),
     );
   }
