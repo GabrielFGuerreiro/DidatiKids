@@ -34,7 +34,7 @@ class TbCriancaAtividades(models.Model):
     pk = models.CompositePrimaryKey('id_atividade', 'id_crianca')
     id_atividade = models.ForeignKey(TbAtividades, models.DO_NOTHING, db_column='id_atividade')
     id_crianca = models.ForeignKey('TbCriancas', models.DO_NOTHING, db_column='id_crianca')
-    desempenho = models.IntegerField(blank=True, null=True)
+    concluida = models.BooleanField(default=False)
 
     class Meta:
         managed = False
@@ -65,7 +65,10 @@ class TbCriancaTopicos(models.Model):
 
 
 class TbCriancas(models.Model):
-    id_crianca = models.IntegerField(primary_key=True)
+    id_crianca = models.AutoField(
+        primary_key=True,
+        editable=False
+    )
     nome = models.CharField(max_length=80, blank=True, null=True)
     dt_nascimento = models.DateField(blank=True, null=True)
     id_responsavel = models.ForeignKey('TbResponsaveis', models.DO_NOTHING, db_column='id_responsavel', blank=True, null=True)
@@ -97,7 +100,10 @@ class TbFaixasetarias(models.Model):
 
 
 class TbResponsaveis(models.Model):
-    id_responsavel = models.IntegerField(primary_key=True)
+    id_responsavel = models.AutoField(
+        primary_key=True,
+        editable=False
+    )
     nome = models.CharField(max_length=80, blank=True, null=True)
     email = models.CharField(max_length=50, blank=True, null=True)
     dt_nascimento = models.DateField(blank=True, null=True)
